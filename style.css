@@ -1,29 +1,163 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  #game-board {
-    display: grid;
-    grid-template-columns: repeat(10, 50px);
-    grid-template-rows: repeat(10, 50px);
-    gap: 5px;
-    margin: 20px auto;
-    justify-content: center;
-  }
-  
-  .cell {
-    width: 50px;
-    height: 50px;
+    font-family: 'Arial', sans-serif;
+    background-color: #2c3e50;
+    color: #ecf0f1;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 30px;
-    background-color: #ddd;
-    border: 1px solid #ccc;
-  }
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 450px;
+}
+
+h1 {
+    color: #f1c40f;
+    margin-top: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    font-size: 1.2em;
+    background-color: #2c3e50;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#game-board {
+    width: 400px;
+    height: 400px;
+    background-color: #2c3e50;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #7f8c8d;
+    border-radius: 5px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#player {
+    width: 40px;
+    height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,50 Q50,10 70,50 L60,70 Q50,80 40,70 Z" fill="%23755c48"/><circle cx="35" cy="40" r="5" fill="%23000"/><circle cx="65" cy="40" r="5" fill="%23000"/><path d="M45,65 Q50,70 55,65" stroke="%23000" fill="none" stroke-width="2"/><circle cx="20" cy="30" r="3" fill="%23755c48"/><circle cx="80" cy="30" r="3" fill="%23755c48"/><path d="M15,25 L5,15 M85,25 L95,15" stroke="%23755c48" stroke-width="3" stroke-linecap="round"/></svg>');
+    position: absolute;
+    transition: all 0.1s;
+    z-index: 10;
+}
+
+.cheese {
+    width: 25px;
+    height: 25px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 L80,20 L80,80 Q50,80 20,50 Z" fill="%23f1c40f"/><circle cx="40" cy="40" r="5" fill="%23d35400" opacity="0.7"/><circle cx="60" cy="50" r="5" fill="%23d35400" opacity="0.7"/><circle cx="50" cy="70" r="5" fill="%23d35400" opacity="0.7"/></svg>');
+    position: absolute;
+    z-index: 5;
+    animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+.cat {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    z-index: 8;
+    transition: transform 0.2s;
+}
+
+.cat:hover {
+    transform: scale(1.1);
+}
+
+.cat-1 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23e74c3c"/><circle cx="35" cy="40" r="5" fill="%23000"/><circle cx="65" cy="40" r="5" fill="%23000"/><path d="M40,60 Q50,70 60,60" stroke="%23000" fill="none" stroke-width="3"/><path d="M15,15 L5,5 M85,15 L95,5" stroke="%23e74c3c" stroke-width="5" stroke-linecap="round"/></svg>');
+}
+
+.cat-2 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%233498db"/><circle cx="35" cy="40" r="5" fill="%23000"/><circle cx="65" cy="40" r="5" fill="%23000"/><path d="M40,60 Q50,70 60,60" stroke="%23000" fill="none" stroke-width="3"/><path d="M15,15 L5,5 M85,15 L95,5" stroke="%233498db" stroke-width="5" stroke-linecap="round"/></svg>');
+}
+
+.cat-3 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%232ecc71"/><circle cx="35" cy="40" r="5" fill="%23000"/><circle cx="65" cy="40" r="5" fill="%23000"/><path d="M40,60 Q50,70 60,60" stroke="%23000" fill="none" stroke-width="3"/><path d="M15,15 L5,5 M85,15 L95,5" stroke="%232ecc71" stroke-width="5" stroke-linecap="round"/></svg>');
+}
+
+.cat-4 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%239b59b6"/><circle cx="35" cy="40" r="5" fill="%23000"/><circle cx="65" cy="40" r="5" fill="%23000"/><path d="M40,60 Q50,70 60,60" stroke="%23000" fill="none" stroke-width="3"/><path d="M15,15 L5,5 M85,15 L95,5" stroke="%239b59b6" stroke-width="5" stroke-linecap="round"/></svg>');
+}
+
+.cat-5 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23e67e22"/><circle cx="35" cy="40" r="5" fill="%23000"/><circle cx="65" cy="40" r="5" fill="%23000"/><path d="M40,60 Q50,70 60,60" stroke="%23000" fill="none" stroke-width="3"/><path d="M15,15 L5,5 M85,15 L95,5" stroke="%23e67e22" stroke-width="5" stroke-linecap="round"/></svg>');
+}
+
+button {
+    background-color: #f1c40f;
+    color: #2c3e50;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #f39c12;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+#game-over {
+    margin-top: 20px;
+    background-color: rgba(44, 62, 80, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#game-over h2 {
+    color: #e74c3c;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.level-up {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(46, 204, 113, 0.9);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    z-index: 100;
+    animation: fadeOut 2s forwards;
+    animation-delay: 1s;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; }
+}
